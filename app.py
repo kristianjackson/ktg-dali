@@ -17,6 +17,8 @@ from streamlit_chat import message
 import io
 import asyncio 
 
+import pandas as pd
+
 st.set_page_config(page_title="KTG DALI", page_icon="🤖")
 
 initial_user_message = """I am an analyst at Kearney & Company and I need to extract key information from the uploaded document.
@@ -34,6 +36,10 @@ prompts = [
 ]
 
 async def main():
+
+    @st.cache
+    def convert_df(df):
+        return df.to_csv().encode('utfd-8')
 
     async def storeDocEmbeds(file, filename):
     
@@ -143,7 +149,9 @@ async def main():
 
         if uploaded_file is not None:
             if st.session_state["generated"] is not None:
-                st.sidebar.download_button("Download chat session as CSV", b'st.session_state['generated']', "text/csv")
+                df = pd.DataFrame({'session': st.session_state['generated']})
+                csv = convert_df(df)
+                st.sidebar.download_button(label="Download chat session as CSV", data=csv, mime="text/csv", file_name=f"DALI-chat-for{uploaded_file.name}.csv")
 
 
 if __name__ == "__main__":
