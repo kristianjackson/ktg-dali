@@ -99,8 +99,8 @@ async def main():
         if 'generated' not in st.session_state:
             st.session_state['generated'] = ["Welcome! You can now ask any questions regarding " + uploaded_file.name]
             output = await conversational_chat("Provide a 300 word summary of the document")
-                st.session_state['past'].append(user_input)
-                st.session_state['generated'].append(output)
+            st.session_state['past'].append(user_input)
+            st.session_state['generated'].append(output)
 
         if 'past' not in st.session_state:
             st.session_state['past'] = [initial_user_message]
