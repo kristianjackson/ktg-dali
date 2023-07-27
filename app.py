@@ -68,7 +68,7 @@ async def main():
 
 
     #Creating the chatbot interface
-    st.title("PDFChat :")
+    st.title("KTG Document Analysis Language Interface (DALI)")
 
     if 'ready' not in st.session_state:
         st.session_state['ready'] = False
