@@ -39,7 +39,7 @@ async def main():
 
     @st.cache
     def convert_df(df):
-        return df.to_csv().encode('utfd-8')
+        return df.to_csv().encode('utf-8')
 
     async def storeDocEmbeds(file, filename):
     
