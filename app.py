@@ -93,7 +93,7 @@ async def main():
             st.session_state['generated'] = ["Welcome! You can now ask any questions regarding " + uploaded_file.name]
 
         if 'past' not in st.session_state:
-            st.session_state['past'] = ["Hey!"]
+            st.session_state['past'] = ["I am an analyst at Kearney & Company and I need to extract key information from the uploaded document. Start by telling me some basic information about the document such as it's title, and a 300 word summary."]
 
         # container for chat history
         response_container = st.container()
