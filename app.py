@@ -124,7 +124,7 @@ async def main():
             with response_container:
                 for i in range(len(st.session_state['generated'])):
                     message(st.session_state["past"][i], is_user=True, key=str(i) + '_user')
-                    message(st.session_state["generated"][i], key=str(i), avatar_style="https://images.emojiterra.com/google/noto-emoji/unicode-15/color/svg/1f916.svg")
+                    message(st.session_state["generated"][i], key=str(i))
 
 
 if __name__ == "__main__":
