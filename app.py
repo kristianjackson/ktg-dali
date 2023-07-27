@@ -57,7 +57,7 @@ async def main():
 
     st.sidebar.header("Configurations:")
     st.sidebar.divider()
-    llm_model = st.sidebar.radio("Which LLM would you like to use: ", ("GPT-4", "GPT 3.5-Turbo"))
+    llm_model = st.sidebar.radio("Which LLM would you like to use: ", ("gpt-4", "gpt-3.5-turbo"))
     st.sidebar.divider()
     uploaded_file = st.sidebar.file_uploader("Choose a file", type="pdf")
 
