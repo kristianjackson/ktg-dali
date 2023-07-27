@@ -76,10 +76,7 @@ async def main():
     st.sidebar.divider()
     uploaded_file = st.sidebar.file_uploader("Choose a file", type="pdf")
     st.sidebar.divider()
-    if uploaded_file is not None:
-        if st.session_state["generated"] is not None:
-            st.sidebar.download_button("Download chat session as CSV", st.session_state['generated'], "text/csv")
-
+    
     llm = ChatOpenAI(model_name=llm_model)
     chain = load_qa_chain(llm, chain_type="map_reduce")
 
@@ -143,6 +140,10 @@ async def main():
                 for i in range(len(st.session_state['generated'])):
                     message(st.session_state["past"][i], is_user=True, key=str(i) + '_user')
                     message(st.session_state["generated"][i], key=str(i))
+
+        if uploaded_file is not None:
+            if st.session_state["generated"] is not None:
+                st.sidebar.download_button("Download chat session as CSV", st.session_state['generated'], "text/csv")
 
 
 if __name__ == "__main__":
