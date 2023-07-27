@@ -143,7 +143,7 @@ async def main():
 
         if uploaded_file is not None:
             if st.session_state["generated"] is not None:
-                st.sidebar.download_button("Download chat session as CSV", st.session_state['generated'], "text/csv")
+                st.sidebar.download_button("Download chat session as CSV", b'st.session_state['generated']', "text/csv")
 
 
 if __name__ == "__main__":
