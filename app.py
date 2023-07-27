@@ -120,7 +120,6 @@ async def main():
         
         if uploaded_file is not None:
             for item in prompts:
-                user_input = st.text_area("Query:", key="input", value=item)
                 output = await conversational_chat(user_input)
                 st.session_state['past'].append(user_input)
                 st.session_state['generated'].append(output)
