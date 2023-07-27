@@ -149,7 +149,7 @@ async def main():
 
         if uploaded_file is not None:
             if st.session_state["generated"] is not None:
-                df = pd.DataFrame({'session': st.session_state['generated']})
+                df = pd.DataFrame({'User': st.session_state['past'], 'DALI': st.session_state['generated']})
                 csv = convert_df(df)
                 st.sidebar.download_button(label="Download chat session as CSV", data=csv, mime="text/csv", file_name=f"DALI-chat-for{uploaded_file.name}.csv")
 
