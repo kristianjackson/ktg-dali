@@ -121,7 +121,7 @@ async def main():
             with container:
                 with st.form(key='my_form', clear_on_submit=True):
                     user_input = st.text_input("Query:", placeholder="e.g: Summarize the paper in a few sentences", key='input', value=item)
-                    #submit_button = st.form_submit_button(label='Send')
+                    submit_button = st.form_submit_button(label='Send')
 
                 # if submit_button and user_input:
                 if user_input:
