@@ -125,21 +125,21 @@ async def main():
         container = st.container()
 
         
-        if uploaded_file is not None:
-            for item in prompts:
-                output = await conversational_chat(item)
-                st.session_state['past'].append(item)
-                st.session_state['generated'].append(output)
-
-        # with container:
-        #     with st.form(key='my_form', clear_on_submit=True):
-        #         user_input = st.text_input("Query:", placeholder="e.g: Summarize the paper in a few sentences", key='input', value=item)
-        #         submit_button = st.form_submit_button(label='Send')
-
-        #     if submit_button and user_input:
-        #         output = await conversational_chat(user_input)
-        #         st.session_state['past'].append(user_input)
+        # if uploaded_file is not None:
+        #     for item in prompts:
+        #         output = await conversational_chat(item)
+        #         st.session_state['past'].append(item)
         #         st.session_state['generated'].append(output)
+
+        with container:
+            with st.form(key='my_form', clear_on_submit=True):
+                user_input = st.text_input("Query:", placeholder="e.g: Summarize the paper in a few sentences", key='input', value=item)
+                submit_button = st.form_submit_button(label='Send')
+
+            if submit_button and user_input:
+                output = await conversational_chat(user_input)
+                st.session_state['past'].append(user_input)
+                st.session_state['generated'].append(output)
 
         if st.session_state['generated']:
             with response_container:
