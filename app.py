@@ -17,6 +17,16 @@ from streamlit_chat import message
 import io
 import asyncio 
 
+initial_user_message = """
+I am an analyst at Kearney & Company and I need to extract key information from the uploaded document.
+
+Founded in 1985, Kearney is the premier CPA firm focused on the Government, providing services across the financial management spectrum. 
+Kearney has helped the Federal Government improve its financial operations’ overall effectiveness and efficiency; increase its level of accountability and compliance with laws, regulations, and guidance; and protect its funds from fraud, waste, and abuse. 
+We understand the Federal Government’s need for efficiency and transparency.
+
+Start by telling me some basic information about the document such as it's title, and a 300 word summary.
+"""
+
 async def main():
 
     async def storeDocEmbeds(file, filename):
@@ -93,7 +103,7 @@ async def main():
             st.session_state['generated'] = ["Welcome! You can now ask any questions regarding " + uploaded_file.name]
 
         if 'past' not in st.session_state:
-            st.session_state['past'] = ["I am an analyst at Kearney & Company and I need to extract key information from the uploaded document. Start by telling me some basic information about the document such as it's title, and a 300 word summary."]
+            st.session_state['past'] = [initial_user_message]
 
         # container for chat history
         response_container = st.container()
