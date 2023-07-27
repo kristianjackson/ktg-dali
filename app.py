@@ -70,7 +70,7 @@ async def main():
     uploaded_file = st.sidebar.file_uploader("Choose a file", type="pdf")
 
     llm = ChatOpenAI(model_name=llm_model)
-    chain = load_qa_chain(llm, chain_type="stuff")
+    chain = load_qa_chain(llm, chain_type="map_reduce")
 
     if 'history' not in st.session_state:
         st.session_state['history'] = []
