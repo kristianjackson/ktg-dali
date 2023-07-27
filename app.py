@@ -76,7 +76,7 @@ async def main():
     st.sidebar.divider()
     uploaded_file = st.sidebar.file_uploader("Choose a file", type="pdf")
     st.sidebar.divider()
-    if st.session_state["generated"]:
+    if st.session_state["generated"] is not None:
         st.sidebar.download_button("Download chat session as CSV", st.session_state['generated'], "text/csv")
 
     llm = ChatOpenAI(model_name=llm_model)
