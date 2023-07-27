@@ -37,7 +37,7 @@ prompts = [
 
 async def main():
 
-    @st.cache
+    @st.cache_data
     def convert_df(df):
         return df.to_csv().encode('utf-8')
 
