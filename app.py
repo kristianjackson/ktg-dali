@@ -17,6 +17,8 @@ from streamlit_chat import message
 import io
 import asyncio 
 
+st.set_page_config(page_title="KTG DALI", page_icon="🤖")
+
 initial_user_message = """I am an analyst at Kearney & Company and I need to extract key information from the uploaded document.
 
 Founded in 1985, Kearney is the premier CPA firm focused on the Government, providing services across the financial management spectrum. 
@@ -122,7 +124,7 @@ async def main():
             with response_container:
                 for i in range(len(st.session_state['generated'])):
                     message(st.session_state["past"][i], is_user=True, key=str(i) + '_user')
-                    message(st.session_state["generated"][i], key=str(i), avatar_style="🤖")
+                    message(st.session_state["generated"][i], key=str(i))
 
 
 if __name__ == "__main__":
