@@ -15,9 +15,7 @@ import streamlit as st
 from streamlit_chat import message
 
 import io
-import asyncio
-
-api_key = os.getenv('OPENAI_API_KEY')  
+import asyncio 
 
 async def main():
 
@@ -58,6 +56,7 @@ async def main():
     st.sidebar.header("Configurations:")
     st.sidebar.divider()
     llm_model = st.sidebar.radio("Which LLM would you like to use: ", ("gpt-4", "gpt-3.5-turbo"))
+    api_key = st.sidebar.text_input(label="API Key:", type="password", help="API keys can be obtained at: https://platform.openai.com/account/api-keys", value=os.getenv('OPENAI_API_KEY'))
     st.sidebar.divider()
     uploaded_file = st.sidebar.file_uploader("Choose a file", type="pdf")
 
