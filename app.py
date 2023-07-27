@@ -53,8 +53,8 @@ async def main():
         # print(st.session_state['history'])
         return result["answer"]
 
-    st.header("Configurations:")
-    st.divider()
+    st.sidebar.header("Configurations:")
+    st.sidebar.divider()
     llm_model = st.sidebar.radio("Which LLM would you like to use: ", ("GPT-4", "GPT 3.5-Turbo"))
 
     llm = ChatOpenAI(model_name="gpt-3.5-turbo")
