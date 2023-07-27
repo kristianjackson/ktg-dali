@@ -75,6 +75,8 @@ async def main():
     api_key = st.sidebar.text_input(label="API Key:", type="password", help="API keys can be obtained at: https://platform.openai.com/account/api-keys", value=os.getenv('OPENAI_API_KEY'))
     st.sidebar.divider()
     uploaded_file = st.sidebar.file_uploader("Choose a file", type="pdf")
+    st.sidebar.divider()
+    st.sidebar.download_button("Download chat session as CSV", st.session_state['generated'], "text/csv")
 
     llm = ChatOpenAI(model_name=llm_model)
     chain = load_qa_chain(llm, chain_type="map_reduce")
