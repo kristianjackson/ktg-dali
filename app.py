@@ -117,11 +117,13 @@ async def main():
         # container for text box
         container = st.container()
 
-        for item in prompts:
-            user_input = st.text_area("Query:", key="input", value=item)
-            output = await conversational_chat(user_input)
-            st.session_state['past'].append(user_input)
-            st.session_state['generated'].append(output)
+        
+        if uploaded_file is not None:
+            for item in prompts:
+                user_input = st.text_area("Query:", key="input", value=item)
+                output = await conversational_chat(user_input)
+                st.session_state['past'].append(user_input)
+                st.session_state['generated'].append(output)
 
         # with container:
         #     with st.form(key='my_form', clear_on_submit=True):
