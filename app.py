@@ -17,9 +17,6 @@ import asyncio
 load_dotenv()
 api_key = os.getenv('OPENAI_API_KEY')  
 
-# vectors = getDocEmbeds("gpt4.pdf")
-# qa = ChatVectorDBChain.from_llm(ChatOpenAI(model_name="gpt-3.5-turbo"), vectors, return_source_documents=True)
-
 async def main():
 
     async def storeDocEmbeds(file, filename):
@@ -56,6 +53,7 @@ async def main():
         # print(st.session_state['history'])
         return result["answer"]
 
+    llm_model = st.sidebar.radio("Which LLM would you like to use: ", ("GPT-4", "GPT 3.5-Turbo"))
 
     llm = ChatOpenAI(model_name="gpt-3.5-turbo")
     chain = load_qa_chain(llm, chain_type="stuff")
