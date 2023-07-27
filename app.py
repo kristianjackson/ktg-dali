@@ -1,20 +1,22 @@
 from PyPDF2 import PdfReader
+
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import FAISS
 from langchain.chains.question_answering import load_qa_chain
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationalRetrievalChain
+
 import pickle
 from pathlib import Path
-from dotenv import load_dotenv
 import os
+
 import streamlit as st
 from streamlit_chat import message
+
 import io
 import asyncio
 
-load_dotenv()
 api_key = os.getenv('OPENAI_API_KEY')  
 
 async def main():
@@ -56,8 +58,10 @@ async def main():
     st.sidebar.header("Configurations:")
     st.sidebar.divider()
     llm_model = st.sidebar.radio("Which LLM would you like to use: ", ("GPT-4", "GPT 3.5-Turbo"))
+    st.sidebar.divider()
+    uploaded_file = st.sidebar.file_uploader("Choose a file", type="pdf")
 
-    llm = ChatOpenAI(model_name="gpt-3.5-turbo")
+    llm = ChatOpenAI(model_name=llm_model)
     chain = load_qa_chain(llm, chain_type="stuff")
 
     if 'history' not in st.session_state:
@@ -70,8 +74,6 @@ async def main():
     if 'ready' not in st.session_state:
         st.session_state['ready'] = False
 
-    uploaded_file = st.file_uploader("Choose a file", type="pdf")
-
     if uploaded_file is not None:
 
         with st.spinner("Processing..."):
@@ -80,7 +82,7 @@ async def main():
             file = uploaded_file.read()
             # pdf = PyPDF2.PdfFileReader()
             vectors = await getDocEmbeds(io.BytesIO(file), uploaded_file.name)
-            qa = ConversationalRetrievalChain.from_llm(ChatOpenAI(model_name="gpt-3.5-turbo"), retriever=vectors.as_retriever(), return_source_documents=True)
+            qa = ConversationalRetrievalChain.from_llm(ChatOpenAI(model_name=llm_model), retriever=vectors.as_retriever(), return_source_documents=True)
 
         st.session_state['ready'] = True
 
